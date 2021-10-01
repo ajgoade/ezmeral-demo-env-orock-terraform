@@ -1,0 +1,987 @@
+{
+  "ad_admin_group": {
+    "sensitive": false,
+    "type": "string",
+    "value": "DemoTenantAdmins"
+  },
+  "ad_member_group": {
+    "sensitive": false,
+    "type": "string",
+    "value": "DemoTenantUsers"
+  },
+  "ad_server_enabled": {
+    "sensitive": false,
+    "type": "bool",
+    "value": true
+  },
+  "ad_server_instance_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "i-061b87f6b6a07c873"
+  },
+  "ad_server_private_ip": {
+    "sensitive": false,
+    "type": "string",
+    "value": "10.1.0.109"
+  },
+  "ad_server_public_ip": {
+    "sensitive": false,
+    "type": "string",
+    "value": "35.183.120.226"
+  },
+  "ad_server_ssh_command": {
+    "sensitive": false,
+    "type": "string",
+    "value": "ssh -o StrictHostKeyChecking=no -i \"./generated/controller.prv_key\" centos@35.183.120.226"
+  },
+  "additional_client_ip_list": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      []
+    ],
+    "value": []
+  },
+  "aws_profile": {
+    "sensitive": false,
+    "type": "string",
+    "value": "default"
+  },
+  "aws_region": {
+    "sensitive": false,
+    "type": "string",
+    "value": "ca-central-1"
+  },
+  "ca_cert": {
+    "sensitive": false,
+    "type": "string",
+    "value": "-----BEGIN CERTIFICATE-----\nMIIDCjCCAfICCQDR7cyh9lCoXDANBgkqhkiG9w0BAQsFADBHMQswCQYDVQQGEwJV\nUzELMAkGA1UECAwCQ0ExFDASBgNVBAoMC015T3JnLCBJbmMuMRUwEwYDVQQDDAxt\neWRvbWFpbi5jb20wHhcNMjEwOTI0MDQwMDE1WhcNMjQwNzE0MDQwMDE1WjBHMQsw\nCQYDVQQGEwJVUzELMAkGA1UECAwCQ0ExFDASBgNVBAoMC015T3JnLCBJbmMuMRUw\nEwYDVQQDDAxteWRvbWFpbi5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK\nAoIBAQCxci4PRWzXi9d9eJ4Sebysu4ajvSFqnBrETVWqz1Av8WwJELBUADxuId94\n9teBsE9kP3zin96cqNwzh7ZspI/4/32hwydVFT3CDQuOXFT/7roKJlTBsX9zDqDr\nH95X5MKJdK8VneBVz8GFZWuzTVtOVxszs7yLwYkWE9JM8Gto4uNggbZD+Uic0vHX\n+b3c4yAlar0/b1XtKhPkVbDki8fT3DwNNxEHpakzj3/F06BIg2Cfo9X/Aja30AqD\nkqGGvo6nhB8EeB+/apG1ZA/mnSd+U+wVfgeVAx5+GXi1Vspw8sYuqcnLuZiV8W+m\nulYXzTo4mKfGyg38PIdH3NylBwjJAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAAVs\nK9YU3mjOft3Pzvcf5m/kOs0DHmrCv5DX7BCkvvxAY0TDpC/XioT0IDJtPZ1lARiR\nYPhFcX+gC3yAaxvBZq0VDHInUegcaizXKN31VMhBAaYDCyo+7ZxwFjLdVTzzB/4k\nABWxV5VT1hXxh8KixRBlSuvzfJDA7GNuc++gkK1dNw5VSRyLFmVHp1VYEJTqC8QK\nRsINIyquBxtX6RA9MQzH6vc7OUh2PvAh9QBC3OkGcghP2ANveGw1aE8ym1bW71hW\nw+AE3YlQ/iWm6NqE8HtBx/q5Mwri64i+ujZ1QRuSKx5ANGAaiL6LTLzwJ/HY5Tcg\nR59cxEJniY8B4ah8CK8=\n-----END CERTIFICATE-----\n"
+  },
+  "ca_key": {
+    "sensitive": false,
+    "type": "string",
+    "value": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAsXIuD0Vs14vXfXieEnm8rLuGo70hapwaxE1Vqs9QL/FsCRCw\nVAA8biHfePbXgbBPZD984p/enKjcM4e2bKSP+P99ocMnVRU9wg0LjlxU/+66CiZU\nwbF/cw6g6x/eV+TCiXSvFZ3gVc/BhWVrs01bTlcbM7O8i8GJFhPSTPBraOLjYIG2\nQ/lInNLx1/m93OMgJWq9P29V7SoT5FWw5IvH09w8DTcRB6WpM49/xdOgSINgn6PV\n/wI2t9AKg5Khhr6Op4QfBHgfv2qRtWQP5p0nflPsFX4HlQMefhl4tVbKcPLGLqnJ\ny7mYlfFvprpWF806OJinxsoN/DyHR9zcpQcIyQIDAQABAoIBAQCKNTmk0VkuJZCI\n/Lp5/3GyRDlhLT1q0P2UKfvwl5qITQztnp8IPkrTKPTrPa+rJo0fssdtqEF2WZtx\nU2IGCsLMmQrcRKlM/sdkbk6y6j2WPfWPVD2tw7dWAW3a1K6UXOwcrdJ1Dsudarz7\nTnxtYnIceYIJahQP8oT4uiWRoay3Ortf0zknwwAOqrWK3v07xmlypj13zQJ6FUdB\n69kQLglaFmuRSmEovCOOGbcah8QNI0MOQmK5Jaakeqb4ELAf5rI2h9NRQ5YcJl92\nZEsn8SD8nQmKX8NGWYNsF0TK7Q3EcKOfMRBtYGdEYzSw5JKOufxtjfS3jOvFJbrV\nUWTjkrvlAoGBAOtyJxdU3H8aKl5j4OjNF/s/JGLKhDy0Urdi9qvFuf/WmCkoWAjR\nFoytZmTQ7wSGYTWvNwl09F/8X8IuS9nPBrpBw26qOuOLZIkV5FfctTq43zGtOKej\niXFcGov/BL8pcmFfnSkefbYKs3Qc3NVtMIW57IGfaT8p9xemWJS3ieaHAoGBAMDv\n0ghNl7rxZRh9BC8qZ+cP30+RjDHgTzj2NZg8UXmhqOQHUh5E8jMvvNJLoFBTUQDo\nyN9wVt72ITsicwc099kQwpxGucFY/PFvG88G8Mg09+tnUQv/olxQqyvz4fOFGJG0\nnvKP+J+DFH3Xrzw7l+PD5SUtp2pAZvKWToCLVBovAoGAJFtUPf4UrmvT7w9tQ4Wo\nFlwBul+bW+RcgYT+oje+KQtyI6jfLz1aRg7gqOC6h/BYQnnz/bnZopjOEKYlgFS/\nrTNKgmQ3A7waojCHOioSsiaqEHm3LevK5X5bexK+IOa9itvA4QCcWOf+Hgf28d4S\niBPVuY5sKhzI0xYUx6Iv4TECgYBaERpZae+FA5+QGPxVEFTE1vIGcQmjVvVkv/sx\nACeAwmjXWluJaeIu5wAco9VI6jwMUp9DP2wuVXQZ6PEN0jpJiLtwvMuGaQZbpuSy\ndqj8rU13BRoeoc2njrj5obY/OkjH7CuvTGph/I0aWg+h7KfxWcek3XUj8sCcSnKH\nK4OtXQKBgQCCNehH/sx/cBs54+3yZASB64Curngk+mtGjDphinGw0gsWRznz7P9K\nRcqkyHRt9H9OQtp/0hCYBQ+YYGJvrbOVWFtBXjPxtFkjK2eTK4PfQNvW76Ae6Grr\n2bfHMEkeeSPsMP/hnViRabzMyJqROPridqkSAhARFnt8z2+KM3WDQQ==\n-----END RSA PRIVATE KEY-----\n"
+  },
+  "client_cidr_block": {
+    "sensitive": false,
+    "type": "string",
+    "value": "74.201.182.218/32"
+  },
+  "controller_instance_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "i-0112a8fd048dd3ac6"
+  },
+  "controller_private_dns": {
+    "sensitive": false,
+    "type": "string",
+    "value": "ip-10-1-0-84.ca-central-1.compute.internal"
+  },
+  "controller_private_ip": {
+    "sensitive": false,
+    "type": "string",
+    "value": "10.1.0.84"
+  },
+  "controller_public_dns": {
+    "sensitive": false,
+    "type": "string",
+    "value": "ec2-99-79-66-49.ca-central-1.compute.amazonaws.com"
+  },
+  "controller_public_ip": {
+    "sensitive": false,
+    "type": "string",
+    "value": "99.79.66.49"
+  },
+  "controller_public_url": {
+    "sensitive": false,
+    "type": "string",
+    "value": "https://99.79.66.49"
+  },
+  "controller_ssh_command": {
+    "sensitive": false,
+    "type": "string",
+    "value": "ssh -o StrictHostKeyChecking=no -i \"./generated/controller.prv_key\" centos@99.79.66.49"
+  },
+  "create_eip_controller": {
+    "sensitive": false,
+    "type": "bool",
+    "value": false
+  },
+  "create_eip_gateway": {
+    "sensitive": false,
+    "type": "bool",
+    "value": true
+  },
+  "create_eip_rdp_linux_server": {
+    "sensitive": false,
+    "type": "bool",
+    "value": false
+  },
+  "create_eks_cluster": {
+    "sensitive": false,
+    "type": "bool",
+    "value": false
+  },
+  "deployment_uuid": {
+    "sensitive": false,
+    "type": "string",
+    "value": "858defd2-10a0-216f-3816-8e0a533d3ddb"
+  },
+  "eks-bearer-token": {
+    "sensitive": true,
+    "type": "string",
+    "value": ""
+  },
+  "eks-ca-certificate": {
+    "sensitive": false,
+    "type": "string",
+    "value": ""
+  },
+  "eks-cluster-name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "858defd2-10a0-216f-3816-8e0a533d3ddb"
+  },
+  "eks-server-url": {
+    "sensitive": false,
+    "type": "string",
+    "value": ""
+  },
+  "embedded_df": {
+    "sensitive": false,
+    "type": "bool",
+    "value": false
+  },
+  "epic_dl_url": {
+    "sensitive": false,
+    "type": "string",
+    "value": "s3://csnow-bins/hpe-cp-rhel-release-5.3.2-3046.bin"
+  },
+  "epic_dl_url_presign_options": {
+    "sensitive": false,
+    "type": "string",
+    "value": "--region eu-west-1"
+  },
+  "epic_options": {
+    "sensitive": false,
+    "type": "string",
+    "value": "--skipeula --default-password admin123"
+  },
+  "epid_dl_url_needs_presign": {
+    "sensitive": false,
+    "type": "bool",
+    "value": true
+  },
+  "gateway_instance_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "i-09d4095d0623aab0c"
+  },
+  "gateway_private_dns": {
+    "sensitive": false,
+    "type": "string",
+    "value": "ip-10-1-0-85.ca-central-1.compute.internal"
+  },
+  "gateway_private_ip": {
+    "sensitive": false,
+    "type": "string",
+    "value": "10.1.0.85"
+  },
+  "gateway_public_dns": {
+    "sensitive": false,
+    "type": "string",
+    "value": "ec2-99-79-21-204.ca-central-1.compute.amazonaws.com"
+  },
+  "gateway_public_ip": {
+    "sensitive": false,
+    "type": "string",
+    "value": "99.79.21.204"
+  },
+  "gateway_ssh_command": {
+    "sensitive": false,
+    "type": "string",
+    "value": "ssh -o StrictHostKeyChecking=no -i \"./generated/controller.prv_key\" centos@99.79.21.204"
+  },
+  "gpu_worker_count": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "number"
+      ]
+    ],
+    "value": [
+      0
+    ]
+  },
+  "install_with_ssl": {
+    "sensitive": false,
+    "type": "bool",
+    "value": true
+  },
+  "mapr_cluster_1_count": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "number"
+      ]
+    ],
+    "value": [
+      3
+    ]
+  },
+  "mapr_cluster_1_hosts_instance_arn": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          [
+            "string",
+            "string",
+            "string"
+          ]
+        ]
+      ]
+    ],
+    "value": [
+      [
+        "arn:aws:ec2:ca-central-1:066803512886:instance/i-08c8a13da778b2d1d",
+        "arn:aws:ec2:ca-central-1:066803512886:instance/i-0c701c97de4f8a2b2",
+        "arn:aws:ec2:ca-central-1:066803512886:instance/i-04b91c64492fff611"
+      ]
+    ]
+  },
+  "mapr_cluster_1_hosts_instance_id": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          [
+            "string",
+            "string",
+            "string"
+          ]
+        ]
+      ]
+    ],
+    "value": [
+      [
+        "i-08c8a13da778b2d1d",
+        "i-0c701c97de4f8a2b2",
+        "i-04b91c64492fff611"
+      ]
+    ]
+  },
+  "mapr_cluster_1_hosts_private_dns": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          [
+            "string",
+            "string",
+            "string"
+          ]
+        ]
+      ]
+    ],
+    "value": [
+      [
+        "ip-10-1-0-28.ca-central-1.compute.internal",
+        "ip-10-1-0-103.ca-central-1.compute.internal",
+        "ip-10-1-0-162.ca-central-1.compute.internal"
+      ]
+    ]
+  },
+  "mapr_cluster_1_hosts_private_ip": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          [
+            "string",
+            "string",
+            "string"
+          ]
+        ]
+      ]
+    ],
+    "value": [
+      [
+        "10.1.0.28",
+        "10.1.0.103",
+        "10.1.0.162"
+      ]
+    ]
+  },
+  "mapr_cluster_1_hosts_private_ip_flat": {
+    "sensitive": false,
+    "type": "string",
+    "value": "10.1.0.28\n10.1.0.103\n10.1.0.162"
+  },
+  "mapr_cluster_1_hosts_public_dns": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          [
+            "string",
+            "string",
+            "string"
+          ]
+        ]
+      ]
+    ],
+    "value": [
+      [
+        "ec2-35-183-67-144.ca-central-1.compute.amazonaws.com",
+        "ec2-99-79-33-111.ca-central-1.compute.amazonaws.com",
+        "ec2-3-96-190-2.ca-central-1.compute.amazonaws.com"
+      ]
+    ]
+  },
+  "mapr_cluster_1_hosts_public_ip": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          [
+            "string",
+            "string",
+            "string"
+          ]
+        ]
+      ]
+    ],
+    "value": [
+      [
+        "35.183.67.144",
+        "99.79.33.111",
+        "3.96.190.2"
+      ]
+    ]
+  },
+  "mapr_cluster_1_hosts_public_ip_flat": {
+    "sensitive": false,
+    "type": "string",
+    "value": "35.183.67.144\n99.79.33.111\n3.96.190.2"
+  },
+  "mapr_cluster_1_hosts_ssh": {
+    "sensitive": false,
+    "type": [
+      "object",
+      {
+        "10.1.0.103": "string",
+        "10.1.0.162": "string",
+        "10.1.0.28": "string"
+      }
+    ],
+    "value": {
+      "10.1.0.103": "ssh -o StrictHostKeyChecking=no -i './generated/controller.prv_key' centos@99.79.33.111",
+      "10.1.0.162": "ssh -o StrictHostKeyChecking=no -i './generated/controller.prv_key' centos@3.96.190.2",
+      "10.1.0.28": "ssh -o StrictHostKeyChecking=no -i './generated/controller.prv_key' centos@35.183.67.144"
+    }
+  },
+  "mapr_cluster_1_name": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "string"
+      ]
+    ],
+    "value": [
+      "xdf.mapr.com"
+    ]
+  },
+  "mapr_cluster_2_count": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "number"
+      ]
+    ],
+    "value": [
+      0
+    ]
+  },
+  "mapr_cluster_2_hosts_instance_arn": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          []
+        ]
+      ]
+    ],
+    "value": [
+      []
+    ]
+  },
+  "mapr_cluster_2_hosts_instance_id": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          []
+        ]
+      ]
+    ],
+    "value": [
+      []
+    ]
+  },
+  "mapr_cluster_2_hosts_private_dns": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          []
+        ]
+      ]
+    ],
+    "value": [
+      []
+    ]
+  },
+  "mapr_cluster_2_hosts_private_ip": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          []
+        ]
+      ]
+    ],
+    "value": [
+      []
+    ]
+  },
+  "mapr_cluster_2_hosts_private_ip_flat": {
+    "sensitive": false,
+    "type": "string",
+    "value": ""
+  },
+  "mapr_cluster_2_hosts_public_dns": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          []
+        ]
+      ]
+    ],
+    "value": [
+      []
+    ]
+  },
+  "mapr_cluster_2_hosts_public_ip": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          []
+        ]
+      ]
+    ],
+    "value": [
+      []
+    ]
+  },
+  "mapr_cluster_2_hosts_public_ip_flat": {
+    "sensitive": false,
+    "type": "string",
+    "value": ""
+  },
+  "mapr_cluster_2_name": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "string"
+      ]
+    ],
+    "value": [
+      "demo2.mapr.com"
+    ]
+  },
+  "nfs_server_enabled": {
+    "sensitive": false,
+    "type": "bool",
+    "value": false
+  },
+  "nfs_server_folder": {
+    "sensitive": false,
+    "type": "string",
+    "value": "nfs server not enabled"
+  },
+  "nfs_server_ssh_command": {
+    "sensitive": false,
+    "type": "string",
+    "value": "nfs server not enabled"
+  },
+  "project_dir": {
+    "sensitive": false,
+    "type": "string",
+    "value": "/Users/jaideepjoshi/Ezmeral/532-0909.works/hcp-demo-env-aws-terraform"
+  },
+  "project_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "jai-ecp-532"
+  },
+  "rdp_server_enabled": {
+    "sensitive": false,
+    "type": "bool",
+    "value": true
+  },
+  "rdp_server_instance_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "i-01c7e9fc2b9ea22fc"
+  },
+  "rdp_server_operating_system": {
+    "sensitive": false,
+    "type": "string",
+    "value": "LINUX"
+  },
+  "rdp_server_private_ip": {
+    "sensitive": false,
+    "type": "string",
+    "value": "10.1.0.96"
+  },
+  "rdp_server_public_ip": {
+    "sensitive": false,
+    "type": "string",
+    "value": "3.96.193.233"
+  },
+  "selinux_disabled": {
+    "sensitive": false,
+    "type": "bool",
+    "value": true
+  },
+  "softether_rdp_ip": {
+    "sensitive": false,
+    "type": "string",
+    "value": "192.168.30.1"
+  },
+  "ssh_prv_key_path": {
+    "sensitive": false,
+    "type": "string",
+    "value": "./generated/controller.prv_key"
+  },
+  "ssh_pub_key_path": {
+    "sensitive": false,
+    "type": "string",
+    "value": "./generated/controller.pub_key"
+  },
+  "subnet_cidr_block": {
+    "sensitive": false,
+    "type": "string",
+    "value": "10.1.0.0/24"
+  },
+  "user": {
+    "sensitive": false,
+    "type": "string",
+    "value": "jaideepj-iam"
+  },
+  "vpc_cidr_block": {
+    "sensitive": false,
+    "type": "string",
+    "value": "10.1.0.0/16"
+  },
+  "worker_count": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "number"
+      ]
+    ],
+    "value": [
+      11
+    ]
+  },
+  "workers_gpu_instance_arn": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          []
+        ]
+      ]
+    ],
+    "value": [
+      []
+    ]
+  },
+  "workers_gpu_instance_id": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          []
+        ]
+      ]
+    ],
+    "value": [
+      []
+    ]
+  },
+  "workers_gpu_private_dns": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          []
+        ]
+      ]
+    ],
+    "value": [
+      []
+    ]
+  },
+  "workers_gpu_private_ip": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          []
+        ]
+      ]
+    ],
+    "value": [
+      []
+    ]
+  },
+  "workers_gpu_public_dns": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          []
+        ]
+      ]
+    ],
+    "value": [
+      []
+    ]
+  },
+  "workers_gpu_public_ip": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          []
+        ]
+      ]
+    ],
+    "value": [
+      []
+    ]
+  },
+  "workers_instance_arn": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          [
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string"
+          ]
+        ]
+      ]
+    ],
+    "value": [
+      [
+        "arn:aws:ec2:ca-central-1:066803512886:instance/i-0102769396292e91b",
+        "arn:aws:ec2:ca-central-1:066803512886:instance/i-0640040a0c9cffebf",
+        "arn:aws:ec2:ca-central-1:066803512886:instance/i-0642aa452e60f45f5",
+        "arn:aws:ec2:ca-central-1:066803512886:instance/i-01f2ff1024264f0a2",
+        "arn:aws:ec2:ca-central-1:066803512886:instance/i-038ecade028dc7056",
+        "arn:aws:ec2:ca-central-1:066803512886:instance/i-040eded475eb2aeaf",
+        "arn:aws:ec2:ca-central-1:066803512886:instance/i-0a8c959bc563dc577",
+        "arn:aws:ec2:ca-central-1:066803512886:instance/i-0027b1492eb2a0d4e",
+        "arn:aws:ec2:ca-central-1:066803512886:instance/i-0ec4c207a84d6b7b6",
+        "arn:aws:ec2:ca-central-1:066803512886:instance/i-0f5c3f0b9c369c6ec",
+        "arn:aws:ec2:ca-central-1:066803512886:instance/i-0ee975c92f607f220"
+      ]
+    ]
+  },
+  "workers_instance_id": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          [
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string"
+          ]
+        ]
+      ]
+    ],
+    "value": [
+      [
+        "i-0102769396292e91b",
+        "i-0640040a0c9cffebf",
+        "i-0642aa452e60f45f5",
+        "i-01f2ff1024264f0a2",
+        "i-038ecade028dc7056",
+        "i-040eded475eb2aeaf",
+        "i-0a8c959bc563dc577",
+        "i-0027b1492eb2a0d4e",
+        "i-0ec4c207a84d6b7b6",
+        "i-0f5c3f0b9c369c6ec",
+        "i-0ee975c92f607f220"
+      ]
+    ]
+  },
+  "workers_private_dns": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          [
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string"
+          ]
+        ]
+      ]
+    ],
+    "value": [
+      [
+        "ip-10-1-0-104.ca-central-1.compute.internal",
+        "ip-10-1-0-145.ca-central-1.compute.internal",
+        "ip-10-1-0-38.ca-central-1.compute.internal",
+        "ip-10-1-0-238.ca-central-1.compute.internal",
+        "ip-10-1-0-12.ca-central-1.compute.internal",
+        "ip-10-1-0-51.ca-central-1.compute.internal",
+        "ip-10-1-0-244.ca-central-1.compute.internal",
+        "ip-10-1-0-186.ca-central-1.compute.internal",
+        "ip-10-1-0-180.ca-central-1.compute.internal",
+        "ip-10-1-0-138.ca-central-1.compute.internal",
+        "ip-10-1-0-46.ca-central-1.compute.internal"
+      ]
+    ]
+  },
+  "workers_private_ip": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          [
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string"
+          ]
+        ]
+      ]
+    ],
+    "value": [
+      [
+        "10.1.0.104",
+        "10.1.0.145",
+        "10.1.0.38",
+        "10.1.0.238",
+        "10.1.0.12",
+        "10.1.0.51",
+        "10.1.0.244",
+        "10.1.0.186",
+        "10.1.0.180",
+        "10.1.0.138",
+        "10.1.0.46"
+      ]
+    ]
+  },
+  "workers_public_dns": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          [
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string"
+          ]
+        ]
+      ]
+    ],
+    "value": [
+      [
+        "ec2-3-96-145-114.ca-central-1.compute.amazonaws.com",
+        "ec2-35-183-20-78.ca-central-1.compute.amazonaws.com",
+        "ec2-3-96-204-30.ca-central-1.compute.amazonaws.com",
+        "ec2-3-96-127-44.ca-central-1.compute.amazonaws.com",
+        "ec2-15-223-114-127.ca-central-1.compute.amazonaws.com",
+        "ec2-3-96-139-81.ca-central-1.compute.amazonaws.com",
+        "ec2-35-183-109-25.ca-central-1.compute.amazonaws.com",
+        "ec2-35-183-100-4.ca-central-1.compute.amazonaws.com",
+        "ec2-35-182-225-243.ca-central-1.compute.amazonaws.com",
+        "ec2-35-183-99-5.ca-central-1.compute.amazonaws.com",
+        "ec2-3-96-193-248.ca-central-1.compute.amazonaws.com"
+      ]
+    ]
+  },
+  "workers_public_ip": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        [
+          "tuple",
+          [
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string",
+            "string"
+          ]
+        ]
+      ]
+    ],
+    "value": [
+      [
+        "3.96.145.114",
+        "35.183.20.78",
+        "3.96.204.30",
+        "3.96.127.44",
+        "15.223.114.127",
+        "3.96.139.81",
+        "35.183.109.25",
+        "35.183.100.4",
+        "35.182.225.243",
+        "35.183.99.5",
+        "3.96.193.248"
+      ]
+    ]
+  },
+  "workers_ssh": {
+    "sensitive": false,
+    "type": [
+      "object",
+      {
+        "10.1.0.104": "string",
+        "10.1.0.12": "string",
+        "10.1.0.138": "string",
+        "10.1.0.145": "string",
+        "10.1.0.180": "string",
+        "10.1.0.186": "string",
+        "10.1.0.238": "string",
+        "10.1.0.244": "string",
+        "10.1.0.38": "string",
+        "10.1.0.46": "string",
+        "10.1.0.51": "string"
+      }
+    ],
+    "value": {
+      "10.1.0.104": "ssh -o StrictHostKeyChecking=no -i './generated/controller.prv_key' centos@3.96.145.114",
+      "10.1.0.12": "ssh -o StrictHostKeyChecking=no -i './generated/controller.prv_key' centos@15.223.114.127",
+      "10.1.0.138": "ssh -o StrictHostKeyChecking=no -i './generated/controller.prv_key' centos@35.183.99.5",
+      "10.1.0.145": "ssh -o StrictHostKeyChecking=no -i './generated/controller.prv_key' centos@35.183.20.78",
+      "10.1.0.180": "ssh -o StrictHostKeyChecking=no -i './generated/controller.prv_key' centos@35.182.225.243",
+      "10.1.0.186": "ssh -o StrictHostKeyChecking=no -i './generated/controller.prv_key' centos@35.183.100.4",
+      "10.1.0.238": "ssh -o StrictHostKeyChecking=no -i './generated/controller.prv_key' centos@3.96.127.44",
+      "10.1.0.244": "ssh -o StrictHostKeyChecking=no -i './generated/controller.prv_key' centos@35.183.109.25",
+      "10.1.0.38": "ssh -o StrictHostKeyChecking=no -i './generated/controller.prv_key' centos@3.96.204.30",
+      "10.1.0.46": "ssh -o StrictHostKeyChecking=no -i './generated/controller.prv_key' centos@3.96.193.248",
+      "10.1.0.51": "ssh -o StrictHostKeyChecking=no -i './generated/controller.prv_key' centos@3.96.139.81"
+    }
+  }
+}
