@@ -65,7 +65,7 @@ resource "null_resource" "provision_vpnserver" {
       <<EOT
       sudo cd /root
       sudo DEBIAN_FRONTEND=noninteractive apt-get update -y
-      sudo curl -O https://raw.githubusercontent.com/angristan/openvpn-install/master/openvpn-install.sh
+      sudo curl -O https://raw.githubusercontent.com/ajgoade/openvpn-install/master/openvpn-install.sh
       sudo chmod +x openvpn-install.sh
       sudo DEBIAN_FRONTEND=noninteractive AUTO_INSTALL=y ./openvpn-install.sh
       sudo cp /home/ubuntu/client.ovpn /tmp/client.ovpn
