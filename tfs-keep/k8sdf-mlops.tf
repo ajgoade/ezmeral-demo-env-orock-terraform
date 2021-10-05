@@ -1,11 +1,11 @@
 ##################################
-# Creating k8sdfmlopsmaster volumes
+# Creating k8s master volumes
 #################################
 
 resource "openstack_blockstorage_volume_v3" "demo-k8sdfmlopsmaster-sda" {
   count       = var.count-k8sdfmlopsmasters
   name        = "${var.prefix}-demo-k8sdfmlopsmaster-${count.index + 1}-sda"
-  size        = 551
+  size        = 51
   image_id    = var.hpe_node_image_id
   metadata = {
     User = var.openstack_username
@@ -15,7 +15,7 @@ resource "openstack_blockstorage_volume_v3" "demo-k8sdfmlopsmaster-sda" {
 resource "openstack_blockstorage_volume_v3" "demo-k8sdfmlopsmaster-sdb" {
   count       = var.count-k8sdfmlopsmasters
   name        = "${var.prefix}-demo-k8sdfmlopsmaster-${count.index + 1}-sdb"
-  size        = 551
+  size        = 51
   metadata = {
     User = var.openstack_username
   }
@@ -24,14 +24,14 @@ resource "openstack_blockstorage_volume_v3" "demo-k8sdfmlopsmaster-sdb" {
 resource "openstack_blockstorage_volume_v3" "demo-k8sdfmlopsmaster-sdc" {
   count       = var.count-k8sdfmlopsmasters
   name        = "${var.prefix}-demo-k8sdfmlopsmaster-${count.index + 1}-sdc"
-  size        = 551
+  size        = 51
   metadata = {
     User = var.openstack_username
   }
 }
 
 ##################################
-# Creating k8sdfmlopsmaster nodes
+# Creating kubernetes master nodes
 ##################################
 resource "openstack_compute_instance_v2" "demo-k8sdfmlopsmaster" {
   count           = var.count-k8sdfmlopsmasters
@@ -49,6 +49,7 @@ resource "openstack_compute_instance_v2" "demo-k8sdfmlopsmaster" {
 
     uuid                  = "${openstack_blockstorage_volume_v3.demo-k8sdfmlopsmaster-sda.*.id[count.index]}"
     source_type           = "volume"
+    volume_size           = 50
     boot_index            = 0
     destination_type      = "volume"
     delete_on_termination = true
@@ -87,13 +88,13 @@ resource "openstack_compute_instance_v2" "demo-k8sdfmlopsmaster" {
 }
 
 ##################################
-# Creating k8sdfworker volumes
+# Creating k8s df worker volumes
 #################################
 
 resource "openstack_blockstorage_volume_v3" "demo-k8sdfworker-sda" {
   count       = var.count-k8sdfworkers
   name        = "${var.prefix}-demo-k8sdfworker-${count.index + 1}-sda"
-  size        = 551
+  size        = 51
   image_id    = var.hpe_node_image_id
   metadata = {
     User = var.openstack_username
@@ -103,7 +104,7 @@ resource "openstack_blockstorage_volume_v3" "demo-k8sdfworker-sda" {
 resource "openstack_blockstorage_volume_v3" "demo-k8sdfworker-sdb" {
   count       = var.count-k8sdfworkers
   name        = "${var.prefix}-demo-k8sdfworker-${count.index + 1}-sdb"
-  size        = 551
+  size        = 51
   metadata = {
     User = var.openstack_username
   }
@@ -112,14 +113,14 @@ resource "openstack_blockstorage_volume_v3" "demo-k8sdfworker-sdb" {
 resource "openstack_blockstorage_volume_v3" "demo-k8sdfworker-sdc" {
   count       = var.count-k8sdfworkers
   name        = "${var.prefix}-demo-k8sdfworker-${count.index + 1}-sdc"
-  size        = 551
+  size        = 51
   metadata = {
     User = var.openstack_username
   }
 }
 
 ##################################
-# Creating k8sdfworker nodes
+# Creating k8s worker nodes
 ##################################
 resource "openstack_compute_instance_v2" "demo-k8sdfworker" {
   count           = var.count-k8sdfworkers
@@ -138,6 +139,7 @@ resource "openstack_compute_instance_v2" "demo-k8sdfworker" {
     #uuid                  = var.hpe_node_image_id
     uuid                  = "${openstack_blockstorage_volume_v3.demo-k8sdfworker-sda.*.id[count.index]}"
     source_type           = "volume"
+    volume_size           = 50
     boot_index            = 0
     destination_type      = "volume"
     delete_on_termination = true
@@ -176,13 +178,13 @@ resource "openstack_compute_instance_v2" "demo-k8sdfworker" {
 }
 
 ##################################
-# Creating k8smlopsworker volumes
+# Creating k8s mlops worker volumes
 #################################
 
 resource "openstack_blockstorage_volume_v3" "demo-k8smlopsworker-sda" {
   count       = var.count-k8smlopsworkers
   name        = "${var.prefix}-demo-k8smlopsworker-${count.index + 1}-sda"
-  size        = 91
+  size        = 51
   image_id    = var.hpe_node_image_id
   metadata = {
     User = var.openstack_username
@@ -192,7 +194,7 @@ resource "openstack_blockstorage_volume_v3" "demo-k8smlopsworker-sda" {
 resource "openstack_blockstorage_volume_v3" "demo-k8smlopsworker-sdb" {
   count       = var.count-k8smlopsworkers
   name        = "${var.prefix}-demo-k8smlopsworker-${count.index + 1}-sdb"
-  size        = 91
+  size        = 51
   metadata = {
     User = var.openstack_username
   }
@@ -201,14 +203,14 @@ resource "openstack_blockstorage_volume_v3" "demo-k8smlopsworker-sdb" {
 resource "openstack_blockstorage_volume_v3" "demo-k8smlopsworker-sdc" {
   count       = var.count-k8smlopsworkers
   name        = "${var.prefix}-demo-k8smlopsworker-${count.index + 1}-sdc"
-  size        = 91
+  size        = 51
   metadata = {
     User = var.openstack_username
   }
 }
 
 ##################################
-# Creating k8smlopsworker nodes
+# Creating k8s mlopsworker nodes
 ##################################
 resource "openstack_compute_instance_v2" "demo-k8smlopsworker" {
   count           = var.count-k8smlopsworkers
@@ -227,6 +229,7 @@ resource "openstack_compute_instance_v2" "demo-k8smlopsworker" {
     #uuid                  = var.hpe_node_image_id
     uuid                  = "${openstack_blockstorage_volume_v3.demo-k8smlopsworker-sda.*.id[count.index]}"
     source_type           = "volume"
+    volume_size           = 50
     boot_index            = 0
     destination_type      = "volume"
     delete_on_termination = true

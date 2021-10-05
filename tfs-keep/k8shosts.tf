@@ -1,0 +1,178 @@
+##################################
+# Creating k8s master volumes
+#################################
+
+resource "openstack_blockstorage_volume_v3" "demo-k8smaster-sda" {
+  count       = var.count-k8smasters
+  name        = "${var.prefix}-demo-k8smaster-${count.index + 1}-sda"
+  size        = 51
+  image_id    = var.hpe_node_image_id
+  metadata = {
+    User = var.openstack_username
+  }
+}
+
+resource "openstack_blockstorage_volume_v3" "demo-k8smaster-sdb" {
+  count       = var.count-k8smasters
+  name        = "${var.prefix}-demo-k8smaster-${count.index + 1}-sdb"
+  size        = 51
+  metadata = {
+    User = var.openstack_username
+  }
+}
+
+resource "openstack_blockstorage_volume_v3" "demo-k8smaster-sdc" {
+  count       = var.count-k8smasters
+  name        = "${var.prefix}-demo-k8smaster-${count.index + 1}-sdc"
+  size        = 51
+  metadata = {
+    User = var.openstack_username
+  }
+}
+
+##################################
+# Creating kubernetes master nodes
+##################################
+resource "openstack_compute_instance_v2" "demo-k8smaster" {
+  count           = var.count-k8smasters
+  name            = "${var.prefix}-demo-k8smaster-${count.index + 1}"
+  flavor_name     = var.demo-k8smaster-flavor
+  key_pair        = openstack_compute_keypair_v2.demo-keypair.name
+  security_groups = [openstack_networking_secgroup_v2.demo-secgroup.name]
+  user_data       = data.template_file.cloud-config-master.rendered
+  metadata = {
+    User = var.openstack_username
+  }
+
+  # Booting from volumes, as some cloud-providers do not allow booting from image
+  block_device {
+
+    uuid                  = "${openstack_blockstorage_volume_v3.demo-k8smaster-sda.*.id[count.index]}"
+    source_type           = "volume"
+    volume_size           = 50
+    boot_index            = 0
+    destination_type      = "volume"
+    delete_on_termination = true
+  } 
+
+   # Add more disks
+  block_device {
+
+    uuid                  = "${openstack_blockstorage_volume_v3.demo-k8smaster-sdb.*.id[count.index]}"
+    source_type           = "volume"
+    boot_index            = 1
+    destination_type      = "volume"
+    delete_on_termination = true
+  }
+
+  block_device {
+
+    uuid                  = "${openstack_blockstorage_volume_v3.demo-k8smaster-sdc.*.id[count.index]}"
+    source_type           = "volume"
+    boot_index            = 2
+    destination_type      = "volume"
+    delete_on_termination = true
+  }
+
+  network {
+    name = openstack_networking_network_v2.demo-network.name
+  }
+
+  lifecycle {
+    ignore_changes = [
+      user_data,
+    ]
+  }
+
+  depends_on = [openstack_compute_keypair_v2.demo-keypair, openstack_networking_subnet_v2.demo-subnet]
+}
+
+##################################
+# Creating k8s worker volumes
+#################################
+
+resource "openstack_blockstorage_volume_v3" "demo-k8sworker-sda" {
+  count       = var.count-k8sworkers
+  name        = "${var.prefix}-demo-k8sworker-${count.index + 1}-sda"
+  size        = 51
+  image_id    = var.hpe_node_image_id
+  metadata = {
+    User = var.openstack_username
+  }
+}
+
+resource "openstack_blockstorage_volume_v3" "demo-k8sworker-sdb" {
+  count       = var.count-k8sworkers
+  name        = "${var.prefix}-demo-k8sworker-${count.index + 1}-sdb"
+  size        = 51
+  metadata = {
+    User = var.openstack_username
+  }
+}
+
+resource "openstack_blockstorage_volume_v3" "demo-k8sworker-sdc" {
+  count       = var.count-k8sworkers
+  name        = "${var.prefix}-demo-k8sworker-${count.index + 1}-sdc"
+  size        = 51
+  metadata = {
+    User = var.openstack_username
+  }
+}
+
+##################################
+# Creating kubernetes worker nodes
+##################################
+resource "openstack_compute_instance_v2" "demo-k8sworker" {
+  count           = var.count-k8sworkers
+  name            = "${var.prefix}-demo-k8sworker-${count.index + 1}"
+  flavor_name     = var.demo-k8sworker-flavor
+  key_pair        = openstack_compute_keypair_v2.demo-keypair.name
+  security_groups = [openstack_networking_secgroup_v2.demo-secgroup.name]
+  user_data       = data.template_file.cloud-config-master.rendered
+  metadata = {
+    User = var.openstack_username
+  }
+
+  # Booting from volumes, as some cloud-providers do not allow booting from image
+  block_device {
+
+    #uuid                  = var.hpe_node_image_id
+    uuid                  = "${openstack_blockstorage_volume_v3.demo-k8sworker-sda.*.id[count.index]}"
+    source_type           = "volume"
+    volume_size           = 50
+    boot_index            = 0
+    destination_type      = "volume"
+    delete_on_termination = true
+  }
+
+   # Add more disks
+  block_device {
+
+    uuid                  = "${openstack_blockstorage_volume_v3.demo-k8sworker-sdb.*.id[count.index]}"
+    source_type           = "volume"
+    boot_index            = 1
+    destination_type      = "volume"
+    delete_on_termination = true
+  }
+
+  block_device {
+
+    uuid                  = "${openstack_blockstorage_volume_v3.demo-k8sworker-sdc.*.id[count.index]}"
+    source_type           = "volume"
+    boot_index            = 2
+    destination_type      = "volume"
+    delete_on_termination = true
+  }
+
+  network {
+    name = openstack_networking_network_v2.demo-network.name
+  }
+
+  lifecycle {
+    ignore_changes = [
+      user_data,
+    ]
+  }
+
+  depends_on = [openstack_compute_keypair_v2.demo-keypair, openstack_networking_subnet_v2.demo-subnet]
+}

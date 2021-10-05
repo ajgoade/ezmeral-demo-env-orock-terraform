@@ -16,7 +16,7 @@ echo CA_KEY=$CA_KEY >> $env_variables
 export CA_CERT=./generated/ca-cert.pem
 echo CA_CERT=$CA_CERT >> $env_variables
 
-export INSTALL_WITH_SSL=False
+export INSTALL_WITH_SSL=True
 echo INSTALL_WITH_SSL=$INSTALL_WITH_SSL >> $env_variables
 
 export EMBEDDED_DF=False
@@ -90,3 +90,35 @@ if [[ "$RDP_SERVER_ENABLED" == "True" ]]; then
 else
    RDP_INSTANCE_ID=""
 fi
+
+WORKER_COUNT=$(nova list|grep k8s|wc -l)
+
+if [[ "$WORKER_COUNT" != "0" ]]; then
+   export WRKR_INSTANCE_IDS=$(nova list |grep k8s | awk '{ split($12, v, "="); print $2}'|awk 'BEGIN { ORS = " " } { print }')
+   export WRKR_PRV_IPS=$(nova list |grep k8s | awk '{ split($12, v, "="); print v[2]}'|awk 'BEGIN { ORS = " " } { print }')
+   export WRKR_PUB_IPS=$(nova list |grep k8s | awk '{ split($12, v, "="); print v[2]}'|awk 'BEGIN { ORS = " " } { print }')
+
+else
+   WRKR_INSTANCE_IDS=""
+   WRKR_PRV_IPS=()
+   WRKR_PUB_IPS=()
+fi
+
+echo WRKR_PRV_HOSTS=$WRKR_PRV_IPS >> $env_variables
+echo WRKR_PUB_HOSTS=$WRKR_PUB_IPS >> $env_variables
+echo WRKR_INSTANCE_IDS=$WRKR_INSTANCE_IDS >> $env_variables
+
+export PICASSO_MASTER_HOSTS=$(nova list |grep k8sdfmlopsmaster | awk '{ split($12, v, "="); print v[2]}'|awk 'BEGIN { ORS = " " } { print }')
+echo PICASSO_MASTER_HOSTS=${PICASSO_MASTER_HOSTS} >> $env_variables
+export PICASSO_WORKER_HOSTS=$(nova list |grep k8sdfworker | awk '{ split($12, v, "="); print v[2]}'|awk 'BEGIN { ORS = " " } { print }')
+echo PICASSO_WORKER_HOSTS=${PICASSO_WORKER_HOSTS} >> $env_variables
+export MLOPS_WORKER_HOSTS=$(nova list |grep k8smlopsworker | awk '{ split($12, v, "="); print v[2]}'|awk 'BEGIN { ORS = " " } { print }')
+echo MLOPS_WORKER_HOSTS=${MLOPS_WORKER_HOSTS} >> $env_variables
+
+export PICASSO_MASTER_IDS=$(nova list |grep k8sdfmlopsmaster | awk '{ split($12, v, "="); print $2}'|awk 'BEGIN { ORS = " " } { print }')
+echo PICASSO_MASTER_IDS=${PICASSO_MASTER_IDS} >> $env_variables
+export PICASSO_WORKER_IDS=$(nova list |grep k8sdfworker | awk '{ split($12, v, "="); print $2}'|awk 'BEGIN { ORS = " " } { print }')
+echo PICASSO_WORKER_IDS=${PICASSO_WORKER_IDS} >> $env_variables
+export MLOPS_WORKER_IDS=$(nova list |grep k8smlopsworker | awk '{ split($12, v, "="); print $2}'|awk 'BEGIN { ORS = " " } { print }')
+echo MLOPS_WORKER_IDS=${MLOPS_WORKER_IDS} >> $env_variables
+

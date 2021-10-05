@@ -31,16 +31,16 @@ count-externaldf-hosts = "0"
 
 # Instances' flavor size
 demo-vpn-flavor = "t1.small"
+demo-adserver-flavor = "m1.xlarge"
 demo-controller-flavor = "m1.xlarge"
 demo-gateway-flavor = "m1.xlarge"
-demo-adserver-flavor = "m1.xlarge"
-demo-rdpserver-flavor = "t1.xlarge"
-demo-k8smaster-flavor = "t1.xlarge"
-demo-k8sworker-flavor = "t1.xlarge"
-demo-k8sdfmlopsmaster-flavor = "t1.xlarge"
-demo-k8sdfworker-flavor = "t1.xlarge"
+demo-k8sdfmlopsmaster-flavor = "m1.xlarge"
+demo-k8sdfworker-flavor = "c1.8xlarge"
 demo-k8smlopsworker-flavor = "t1.xlarge"
 demo-externaldf-flavor = "t1.xlarge"
+demo-k8smaster-flavor = "t1.xlarge"
+demo-k8sworker-flavor = "t1.xlarge"
+demo-rdpserver-flavor = "t1.xlarge"
 
 # All Resourcesi for this demo env will be prefixed to avoid clashing names
 prefix = "jai-ecp"

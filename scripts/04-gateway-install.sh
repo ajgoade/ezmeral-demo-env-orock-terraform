@@ -10,6 +10,9 @@ set -u # abort on undefined variable
 source "./scripts/functions.sh"
 source "./scripts/00b-load-env-variables.sh"
 
+exec > >(tee -i generated/$(basename $0).log)
+exec 2>&1
+
 if [[ ! -d generated ]]; then
    echo "This file should be executed from the project directory"
    exit 1
@@ -56,4 +59,4 @@ tput sgr0
 tput setaf 2
 echo "Set Gateway SSL"
 tput sgr0
-#./scripts/04a-set-gateway-ssl.sh
+./scripts/04a-gateway-set-ssl.sh

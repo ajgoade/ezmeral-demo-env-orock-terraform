@@ -1,4 +1,19 @@
 #!/bin/bash
+
+./scripts/check_prerequisites.sh
+source "./scripts/functions.sh"
+source "./scripts/00b-load-env-variables.sh"
+export HPECP_CONFIG_FILE="./generated/hpecp.conf"
+
+exec > >(tee -i generated/$(basename $0).log)
+exec 2>&1
+
+tput setaf 2
+echo "Preparing k8shosts: Installing RPMS and Falco Driver"
+tput sgr0
+#Prepare K8shosts with RPMs and falco
+./scripts/05a-k8shosts-prepare.sh
+
 ################################################################################
 #
 # Picasso setup
@@ -6,31 +21,35 @@
 ################################################################################
 
 # select the IP addresses of the k8s hosts
-MASTER_HOSTS=$(./bin/terraform_get_worker_hosts_private_ips_by_index.py $MASTER_HOSTS_INDEX)
-PICASSO_WORKER_HOSTS=$(./bin/terraform_get_worker_hosts_private_ips_by_index.py $PICASSO_WORKER_HOSTS_INDEX)
-MLOPS_WORKER_HOSTS=$(./bin/terraform_get_worker_hosts_private_ips_by_index.py $MLOPS_WORKER_HOSTS_INDEX)
+PICASSO_MASTER_HOSTS=$(nova list |grep k8sdfmlopsmaster | awk '{ split($12, v, "="); print v[2]}'|awk 'BEGIN { ORS = " " } { print }')
+PICASSO_WORKER_HOSTS=$(nova list |grep k8sdfworker | awk '{ split($12, v, "="); print v[2]}'|awk 'BEGIN { ORS = " " } { print }')
+MLOPS_WORKER_HOSTS=$(nova list |grep k8smlopsworker | awk '{ split($12, v, "="); print v[2]}'|awk 'BEGIN { ORS = " " } { print }')
 
-# Add ECP workers without tags
-./bin/experimental/03_k8sworkers_add.sh $MASTER_HOSTS &
-MASTER_HOSTS_ADD_PID=$!
+PICASSO_MASTER_IDS=$(nova list |grep k8sdfmlopsmaster | awk '{ split($12, v, "="); print $2}'|awk 'BEGIN { ORS = " " } { print }')
+PICASSO_WORKER_IDS=$(nova list |grep k8sdfworker | awk '{ split($12, v, "="); print $2}'|awk 'BEGIN { ORS = " " } { print }')
+MLOPS_WORKER_IDS=$(nova list |grep k8smlopsworker | awk '{ split($12, v, "="); print $2}'|awk 'BEGIN { ORS = " " } { print }')
 
-# Add ECP workers with picasso tags
-./bin/experimental/03_k8sworkers_add_with_picasso_tag.sh $PICASSO_WORKER_HOSTS &
+# Add Picasso Masters without tags
+./scripts/05b-k8sdfmlopsmasters-add.sh $PICASSO_MASTER_HOSTS &
+PICASSO_MASTER_HOSTS_ADD_PID=$!
+
+# Add Picasso Workers with picasso tags
+./scripts/05c-k8sdfworkers-add.sh $PICASSO_WORKER_HOSTS &
 WORKER_DF_HOSTS_ADD_PID=$!
 
-# Add ECP workers without picasso tags
-./bin/experimental/03_k8sworkers_add.sh $MLOPS_WORKER_HOSTS &
+# Add MLOPS Workers without picasso tags
+./scripts/05d-k8smlopsworkers-add.sh $MLOPS_WORKER_HOSTS &
 WORKER_NON_DF_HOSTS_ADD_PID=$!
 
-wait $MASTER_HOSTS_ADD_PID
+wait $PICASSO_MASTER_HOSTS_ADD_PID
 wait $WORKER_DF_HOSTS_ADD_PID
 wait $WORKER_NON_DF_HOSTS_ADD_PID
 
 
-QUERY="[*] | @[?contains('${MASTER_HOSTS}', ipaddr)] | [*][_links.self.href] | [] | sort(@)"
+QUERY="[*] | @[?contains('${PICASSO_MASTER_HOSTS}', ipaddr)] | [*][_links.self.href] | [] | sort(@)"
 MASTER_IDS=$(hpecp k8sworker list --query "${QUERY}" --output text | tr '\n' ' ')
-echo MASTER_HOSTS=$MASTER_HOSTS
-echo MASTER_IDS=$MASTER_IDS
+echo PICASSO_MASTER_HOSTS=$PICASSO_MASTER_HOSTS
+echo PICASSO_MASTER_IDS=$PICASSO_MASTER_IDS
 
 QUERY="[*] | @[?contains('${PICASSO_WORKER_HOSTS}', ipaddr)] | [*][_links.self.href] | [] | sort(@)"
 PICASSO_WORKER_IDS=$(hpecp k8sworker list --query "${QUERY}" --output text | tr '\n' ' ')
@@ -44,7 +63,7 @@ echo MLOPS_WORKER_IDS=$MLOPS_WORKER_IDS
 
 K8S_VERSION=$(hpecp k8scluster k8s-supported-versions --major-filter 1 --minor-filter 20 --output text)
 
-AD_SERVER_PRIVATE_IP=$(terraform output ad_server_private_ip)
+AD_SERVER_PRIVATE_IP=$AD_PRV_IP
 
 K8S_HOST_CONFIG="$(echo $MASTER_IDS | sed 's/ /:master,/g'):master,$(echo $PICASSO_WORKER_IDS $MLOPS_WORKER_IDS | sed 's/ /:worker,/g'):worker"
 echo K8S_HOST_CONFIG=$K8S_HOST_CONFIG
@@ -76,7 +95,7 @@ CLUSTER_ID=$(hpecp k8scluster create \
    
 echo CLUSTER_ID=$CLUSTER_ID
 
-echo CONTROLLER URL: $(terraform output controller_public_url)
+#echo CONTROLLER URL: $(terraform output controller_public_url)
 
 date
 echo "Waiting up to 1 hour for status == error|ready"
@@ -89,7 +108,7 @@ hpecp config get | grep  bds_global_
 
 if hpecp k8scluster list | grep ready
 then
-     ./bin/register_picasso.sh $CLUSTER_ID
+     echo "K8SDF Cluster installed. Proceeding to register DF Cluster"
 else
      set +e
      THE_DATE=$(date +"%Y-%m-%dT%H:%M:%S%z")

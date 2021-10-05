@@ -7,6 +7,9 @@ tput sgr0
 source "./scripts/functions.sh"
 source "./scripts/00b-load-env-variables.sh"
 
+exec > >(tee -i generated/$(basename $0).log)
+exec 2>&1
+
 #############################
 #Install AD Server
 #############################

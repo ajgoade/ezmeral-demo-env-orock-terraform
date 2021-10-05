@@ -4,6 +4,8 @@ set -e # abort on error
 set -u # abort on undefined variable
 
 ./scripts/check_prerequisites.sh
+exec > >(tee -i generated/$(basename $0).log)
+exec 2>&1
 
 tput setaf 2
 echo "Disconnecting VPN connection to VPN Server"

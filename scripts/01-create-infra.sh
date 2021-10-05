@@ -11,7 +11,6 @@ fi
 source "scripts/functions.sh"
 ./scripts/check_prerequisites.sh
 
-
 tput setaf 1
 print_term_width '='
 echo "IMPORTANT: Please ensure you are NOT connected to a corporate VPN."
@@ -63,7 +62,7 @@ if [[ ! -f  "./generated/ca-key.pem" ]]; then
    chmod 660 "./generated/ca-key.pem"
 fi
 
-exec > >(tee -i generated/log-$(basename $0).txt)
+exec > >(tee -i generated/$(basename $0).log)
 exec 2>&1
 
 tput setaf 2
@@ -80,7 +79,7 @@ tput sgr0
 openstack server list --sort-column Name
 
 tput setaf 2
-echo "Generating Environment Variables file"
+echo "Gathering Environment Variables"
 tput sgr0
 source "./scripts/00a-gen-env-variables.sh"
 
@@ -96,7 +95,7 @@ sleep 15
 ./scripts/01b-check-ssh-connections.sh
 
 tput setaf 2
-echo "Setting Passwordless SSH between Controller and Gateway"
+echo "Setting Passwordless SSH between Controller, Gateway & K8S Hosts"
 tput sgr0
 
 ./scripts/01c-setup-passwordless-ssh.sh
