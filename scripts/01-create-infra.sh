@@ -95,7 +95,7 @@ sleep 15
 ./scripts/01b-check-ssh-connections.sh
 
 tput setaf 2
-echo "Setting Passwordless SSH between Controller, Gateway & K8S Hosts"
+echo "Setting Passwordless SSH between Controller, Gateway , DNS Server & K8S Hosts"
 tput sgr0
 
 ./scripts/01c-setup-passwordless-ssh.sh
@@ -103,3 +103,8 @@ tput sgr0
 tput setaf 2
 echo "Passwordless SSH setup complete"
 tput sgr0
+
+tput setaf 2
+echo "Installing/Configuring DNS Server"
+tput sgr0
+./scripts/01d-dnsserver-install.sh

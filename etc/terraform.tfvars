@@ -1,6 +1,6 @@
 # please fill these variables or use TF_VARS_ prefix to be exported env variables
 # 
-openstack_username = "jaideep.joshi"
+openstack_username = ""
 openstack_password = "" 
 openstack_domain   = "HPE_Ezmeral"
 openstack_project  = "3d46abc7b3de4b3cb67c4e5bc86c3fd4"

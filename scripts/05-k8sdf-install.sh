@@ -9,10 +9,13 @@ exec > >(tee -i generated/$(basename $0).log)
 exec 2>&1
 
 tput setaf 2
-echo "Preparing k8shosts: Installing RPMS and Falco Driver"
+echo "Preparing k8shosts: Installing RPMS Falco Driver"
 tput sgr0
 #Prepare K8shosts with RPMs and falco
 ./scripts/05a-k8shosts-prepare.sh
+
+#Setup DNS
+./scripts/05b-k8shosts-setup-dns.sh
 
 ################################################################################
 #
@@ -30,15 +33,15 @@ PICASSO_WORKER_IDS=$(nova list |grep k8sdfworker | awk '{ split($12, v, "="); pr
 MLOPS_WORKER_IDS=$(nova list |grep k8smlopsworker | awk '{ split($12, v, "="); print $2}'|awk 'BEGIN { ORS = " " } { print }')
 
 # Add Picasso Masters without tags
-./scripts/05b-k8sdfmlopsmasters-add.sh $PICASSO_MASTER_HOSTS &
+./scripts/05c-k8sdfmlopsmasters-add.sh $PICASSO_MASTER_HOSTS &
 PICASSO_MASTER_HOSTS_ADD_PID=$!
 
 # Add Picasso Workers with picasso tags
-./scripts/05c-k8sdfworkers-add.sh $PICASSO_WORKER_HOSTS &
+./scripts/05d-k8sdfworkers-add.sh $PICASSO_WORKER_HOSTS &
 WORKER_DF_HOSTS_ADD_PID=$!
 
 # Add MLOPS Workers without picasso tags
-./scripts/05d-k8smlopsworkers-add.sh $MLOPS_WORKER_HOSTS &
+./scripts/05e-k8smlopsworkers-add.sh $MLOPS_WORKER_HOSTS &
 WORKER_NON_DF_HOSTS_ADD_PID=$!
 
 wait $PICASSO_MASTER_HOSTS_ADD_PID

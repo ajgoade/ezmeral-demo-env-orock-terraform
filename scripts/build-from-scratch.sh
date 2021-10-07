@@ -21,6 +21,7 @@ sleep 10
 ./scripts/04-*
 ./scripts/05-*
 ./scripts/06-* /api/v2/k8scluster/1
+./scripts/07-*
 
 tput setaf 3
 echo "Wow! Got this far??!!"

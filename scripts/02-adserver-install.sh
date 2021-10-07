@@ -18,8 +18,6 @@ do
 ssh -o StrictHostKeyChecking=no -i ./generated/controller.prv_key centos@$y "hostname"
 ssh -o StrictHostKeyChecking=no -i ./generated/controller.prv_key centos@$y "sudo sed -i --follow-symlinks 's/^SELINUX=.*/SELINUX=disabled/g' /etc/sysconfig/selinux"
 ssh -o StrictHostKeyChecking=no -i ./generated/controller.prv_key centos@$y "sudo yum install -y deltarpm --nogpgcheck"
-#ssh -o StrictHostKeyChecking=no -i ./generated/controller.prv_key centos@$y "echo Patience. Running Yum Update."
-#ssh -o StrictHostKeyChecking=no -i ./generated/controller.prv_key centos@$y "sudo yum update -y --nogpgcheck"
 ssh -o StrictHostKeyChecking=no -i ./generated/controller.prv_key centos@$y "sudo yum install -y -q wget git --nogpgcheck"
 ssh -o StrictHostKeyChecking=no -i ./generated/controller.prv_key centos@$y "sudo yum install -y openldap-clients --nogpgcheck"
 ssh -o StrictHostKeyChecking=no -i ./generated/controller.prv_key centos@$y "wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm"
@@ -45,3 +43,6 @@ done
 tput setaf 2
 echo "AD Server Ready"
 tput sgr0
+
+#verify AD server config
+./scripts/02a-adserver-verify-config.sh

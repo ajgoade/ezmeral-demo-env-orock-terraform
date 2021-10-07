@@ -22,9 +22,6 @@ echo INSTALL_WITH_SSL=$INSTALL_WITH_SSL >> $env_variables
 export EMBEDDED_DF=False
 echo EMBEDDED_DF=$EMBEDDED_DF >> $env_variables
 
-export CREATE_EIP_GATEWAY=True
-echo CREATE_EIP_GATEWAY=$CREATE_EIP_GATEWAY >> $env_variables
-
 export AD_SERVER_ENABLED=True
 echo AD_SERVER_ENABLED=$AD_SERVER_ENABLED >> $env_variables
 export AD_INSTANCE_ID=$(nova list |grep adserver | awk '{print $2}')
@@ -37,6 +34,13 @@ export AD_MEMBER_GROUP=DemoTenantUsers
 echo AD_MEMBER_GROUP=$AD_MEMBER_GROUP >> $env_variables
 export AD_ADMIN_GROUP=DemoTenantAdmins
 echo AD_ADMIN_GROUP=$AD_ADMIN_GROUP >> $env_variables
+
+export DNSSRVR_INSTANCE_ID=$(nova list |grep dnsserver | awk '{print $2}')
+echo DNSSRVR_INSTANCE_ID=$DNSSRVR_INSTANCE_ID >> $env_variables
+export DNSSRVR_PRV_IP=$(nova list |grep dnsserver | awk '{ split($12, v, "="); print v[2]}')
+echo DNSSRVR_PRV_IP=$DNSSRVR_PRV_IP >> $env_variables
+export DNSSRVR_PUB_IP=$(nova list |grep dnsserver | awk '{ split($12, v, "="); print v[2]}')
+echo DNSSRVR_PUB_IP=$DNSSRVR_PUB_IP >> $env_variables
 
 export RDP_SERVER_ENABLED=False
 echo RDP_SERVER_ENABLED=$RDP_SERVER_ENABLED >> $env_variables

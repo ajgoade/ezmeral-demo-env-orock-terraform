@@ -21,14 +21,14 @@ resource "openstack_blockstorage_volume_v3" "demo-k8sdfmlopsmaster-sdb" {
   }
 }
 
-resource "openstack_blockstorage_volume_v3" "demo-k8sdfmlopsmaster-sdc" {
-  count       = var.count-k8sdfmlopsmasters
-  name        = "${var.prefix}-demo-k8sdfmlopsmaster-${count.index + 1}-sdc"
-  size        = 551
-  metadata = {
-    User = var.openstack_username
-  }
-}
+#resource "openstack_blockstorage_volume_v3" "demo-k8sdfmlopsmaster-sdc" {
+#  count       = var.count-k8sdfmlopsmasters
+#  name        = "${var.prefix}-demo-k8sdfmlopsmaster-${count.index + 1}-sdc"
+#  size        = 551
+#  metadata = {
+#    User = var.openstack_username
+#  }
+#}
 
 ##################################
 # Creating k8sdfmlopsmaster nodes
@@ -64,14 +64,14 @@ resource "openstack_compute_instance_v2" "demo-k8sdfmlopsmaster" {
     delete_on_termination = true
   }
 
-  block_device {
+  #block_device {
 
-    uuid                  = "${openstack_blockstorage_volume_v3.demo-k8sdfmlopsmaster-sdc.*.id[count.index]}"
-    source_type           = "volume"
-    boot_index            = 2
-    destination_type      = "volume"
-    delete_on_termination = true
-  }
+  #  uuid                  = "${openstack_blockstorage_volume_v3.demo-k8sdfmlopsmaster-sdc.*.id[count.index]}"
+  #  source_type           = "volume"
+  #  boot_index            = 2
+  #  destination_type      = "volume"
+  #  delete_on_termination = true
+  #}
 
   network {
     name = openstack_networking_network_v2.demo-network.name
@@ -198,14 +198,14 @@ resource "openstack_blockstorage_volume_v3" "demo-k8smlopsworker-sdb" {
   }
 }
 
-resource "openstack_blockstorage_volume_v3" "demo-k8smlopsworker-sdc" {
-  count       = var.count-k8smlopsworkers
-  name        = "${var.prefix}-demo-k8smlopsworker-${count.index + 1}-sdc"
-  size        = 91
-  metadata = {
-    User = var.openstack_username
-  }
-}
+#resource "openstack_blockstorage_volume_v3" "demo-k8smlopsworker-sdc" {
+#  count       = var.count-k8smlopsworkers
+#  name        = "${var.prefix}-demo-k8smlopsworker-${count.index + 1}-sdc"
+#  size        = 91
+#  metadata = {
+#    User = var.openstack_username
+#  }
+#}
 
 ##################################
 # Creating k8smlopsworker nodes
@@ -242,14 +242,13 @@ resource "openstack_compute_instance_v2" "demo-k8smlopsworker" {
     delete_on_termination = true
   }
 
-  block_device {
+  #block_device {
 
-    uuid                  = "${openstack_blockstorage_volume_v3.demo-k8smlopsworker-sdc.*.id[count.index]}"
-    source_type           = "volume"
-    boot_index            = 2
-    destination_type      = "volume"
-    delete_on_termination = true
-  }
+  #  uuid                  = "${openstack_blockstorage_volume_v3.demo-k8smlopsworker-sdc.*.id[count.index]}"
+  #  boot_index            = 2
+  #  destination_type      = "volume"
+  #  delete_on_termination = true
+  #}
 
   network {
     name = openstack_networking_network_v2.demo-network.name
