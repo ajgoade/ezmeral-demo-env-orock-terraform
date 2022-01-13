@@ -1,0 +1,12 @@
+#Ignore any generated files
+/generated
+
+#tfstate
+*.tfstate
+*.tfstate.backup
+
+#HPE Credentials
+HPE-Ezmeral*.sh
+
+#TF Lock
+.terraform.lock.hcl
